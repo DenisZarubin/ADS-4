@@ -5,36 +5,36 @@
 
 template<typename T>
 class TPQueue {
-   private :
-    T* arr;
-    int size;
-    int begin,
-        end;
-    int count;
-    int stepBack(int index) {
+ private :
+  T* arr;
+  int size;
+  int begin,
+      end;
+  int count;
+  int stepBack(int index) {
         int result = --index;
         if (result < 0)
             result += size + 1;
         return result;
-    }
-    int stepForward(int index) {
+  }
+  int stepForward(int index) {
         int result = ++index;
         if (result > size)
             result -= size + 1;
         return result;
-    }
+   }
 
 
-   public :
-    TPQueue() :
-        size(100),
-        begin(0), end(0), count(0) {
-        arr = new T[size + 1];
-    }
-    ~TPQueue() {
-        delete[] arr;
-    }
-    void push(const T& item) {
+ public :
+  TPQueue() :
+      size(100),
+      begin(0), end(0), count(0) {
+      arr = new T[size + 1];
+  }
+  ~TPQueue() {
+      delete[] arr;
+  }
+  void push(const T& item) {
         assert(count < size);
         int current = end;
         while (begin != current && item.prior > arr[stepBack(current)].prior) {
@@ -44,24 +44,24 @@ class TPQueue {
         arr[current] = item;
         end = stepForward(end);
         count++;
-    }
-    T pop() {
+  }
+  T pop() {
         assert(count > 0);
         T item = arr[begin];
         count--;
         begin = stepForward(begin);
         return item;
-    }
-    T get() const {
+  }
+  T get() const {
         assert(count > 0);
         return arr[begin];
-    }
-    bool isEmpty() const {
+  }
+  bool isEmpty() const {
         return count == 0;
-    }
-    bool isFull() const {
+  }
+  bool isFull() const {
         return count == size;
-    }
+  }
 };
 
 struct SYM {
