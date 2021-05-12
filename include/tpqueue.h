@@ -22,7 +22,7 @@ class TPQueue {
         if (result > size)
             result -= size + 1;
         return result;
-   }
+  }
 
 
  public :
